@@ -5,6 +5,7 @@ import { BsBookmark, BsPlayCircle } from "react-icons/bs"
 import { AiOutlineStar } from "react-icons/ai"
 import { BiMoviePlay } from "react-icons/bi"
 import { useTabs } from '@/app/Context/TabsContext'
+import { useRouter } from 'next/navigation'
 
 import CatalogBar from './catalog-bar'
 
@@ -13,6 +14,7 @@ const MainSection = () => {
   const [topMovies, setTopMovies] = useState([]);
   const [movieDetail, setMovieDetail] = useState(false)
   const [hoverStates, setHoverStates] = useState([]);
+  const router = useRouter()
 
   const toggleHover = (index) => {
     const newHoverStates = [...hoverStates];
@@ -37,13 +39,13 @@ const MainSection = () => {
         <CatalogBar/>
             <div className='grid grid-cols-4 gap-10 mt-8 relative'>
               {topMovies.map((topMovie, index) => (
-                    <div className='flex flex-col gap-3' key={topMovie.id}>
+                    <div onClick={() => router.push(`/movie/${topMovie.id}`)} className='flex flex-col gap-3' key={topMovie.id}>
                         <div onMouseEnter={() => toggleHover(index)} onMouseLeave={() => toggleHover(index)} className="relative cursor-pointer overflow-hidden rounded-2xl bg-gray-500 opacity-70 hover:bg-transparent hover:opacity-100 transition duration-500">
                           {
-                            topMovie.backdrop_path == null ?
+                            topMovie?.backdrop_path == null ?
                             <div className='min-h-[193.16px]'>
                             </div> : 
-                            <img src={`https://image.tmdb.org/t/p/original${topMovie.backdrop_path}`} alt="" className="object-cover relative hover:blur-sm hover:scale-110 transition duration-500 cursor-pointer"/>
+                            <img src={`https://image.tmdb.org/t/p/original${topMovie?.backdrop_path}`} alt="" className="object-cover relative hover:blur-sm hover:scale-110 transition duration-500 cursor-pointer"/>
                           }
                           <div className={`${hoverStates[index] ? "" : "hidden"} transition duration-500`}>
                               <div className="absolute top-5 left-5 bg-primary p-2 rounded-lg">
@@ -51,14 +53,14 @@ const MainSection = () => {
                               </div>
                               <div className="absolute top-5 right-5 flex gap-1 bg-primary p-2 rounded-lg">
                                 <AiOutlineStar size={15} className="text-secondary"/>
-                                <span className="text-xs text-white hover:!opacity-100">{topMovie.vote_average}</span>
+                                <span className="text-xs text-white hover:!opacity-100">{topMovie?.vote_average}</span>
                               </div>
                               <BsPlayCircle size={40} className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'/>
                           </div>
                         </div>
                         <div className='flex justify-between gap-10'>
-                          <p className='font-semibold'>{tabs !== 'airing_today' ? topMovie.title : topMovie.name}</p>
-                          <p>{tabs !== 'airing_today' ? moment(topMovie.release_date).format('YYYY') : ''}</p>
+                          <p className='font-semibold'>{tabs !== 'airing_today' ? topMovie?.title : topMovie?.name}</p>
+                          <p>{tabs !== 'airing_today' ? moment(topMovie?.release_date).format('YYYY') : ''}</p>
                         </div>
                     </div>
               ))}

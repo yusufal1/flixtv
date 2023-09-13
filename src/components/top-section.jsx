@@ -1,14 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import SwiperCore, { Pagination, Navigation } from "swiper/core"; // Import required Swiper components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
 import { BsBookmark } from "react-icons/bs"
 import { AiOutlineStar } from "react-icons/ai"
 import { useRouter } from 'next/navigation'
 
-SwiperCore.use([Pagination, Navigation]); // Add Swiper pagination and navigation modules to SwiperCore
 
 const TopSection = () => {
   const router = useRouter()
@@ -35,9 +37,10 @@ const TopSection = () => {
   }, []);
 
   return (
-    <Swiper 
-    spaceBetween={30} 
-    slidesPerView={5}
+    <Swiper
+    slidesPerView={'auto'}
+        spaceBetween={30}
+        freeMode={true}
     className="bg-primary !pl-[3%]"
     >
       {movies.map((movie, index) => (

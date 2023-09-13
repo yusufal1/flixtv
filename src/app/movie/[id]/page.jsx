@@ -20,7 +20,7 @@ const Page = async ({ params }) => {
   const movieVideo = await getMovieVideo(id);
   console.log("videoooo", movieVideo);
 
-  const backgroundImageUrl = `https://image.tmdb.org/t/p/original${movieDetail.backdrop_path}`;
+  const backgroundImageUrl = `https://image.tmdb.org/t/p/original${movieDetail?.backdrop_path}`;
 
   const containerStyle = {
     backgroundImage: `url('${backgroundImageUrl}')`,
@@ -36,28 +36,28 @@ const Page = async ({ params }) => {
       <BsPlayCircle size={40}/>
       <span className='text-2xl'>Trailer</span>
     </div>
-    <h2 className='text-white text-4xl mt-[4%]'>{movieDetail.title}</h2>
+    <h2 className='text-white text-4xl mt-[4%]'>{movieDetail?.title}</h2>
     <div className='flex mt-[2%] gap-5'>
         <div className='flex items-center gap-2'>
             <AiOutlineStar size={20} className='text-secondary'/>
-            <span className='text-white'>{movieDetail.vote_average.toFixed(1)}</span>
+            <span className='text-white'>{movieDetail?.vote_average.toFixed(1)}</span>
         </div>
         <div className='flex items-center gap-2'>
             <BiSolidCircle size={7} className='text-secondary'/>
-            <span className='text-white'>{movieDetail.genres[0].name}</span>
+            <span className='text-white'>{movieDetail?.genres[0]?.name}</span>
         </div>
         <div className='flex items-center gap-2'>
             <BiSolidCircle size={7} className='text-secondary'/>
-            <span className='text-white'>{moment(movieDetail.release_date).format('YYYY')}</span>
+            <span className='text-white'>{moment(movieDetail?.release_date).format('YYYY')}</span>
         </div>
         <div className='flex items-center gap-2'>
             <BiSolidCircle size={7} className='text-secondary'/>
-            <span className='text-white'>{Math.floor(movieDetail.runtime / 60)} h {Math.floor(movieDetail.runtime % 60)} min</span>
+            <span className='text-white'>{Math.floor(movieDetail?.runtime / 60)} h {Math.floor(movieDetail?.runtime % 60)} min</span>
         </div>
     </div>
-    <p className='mt-[5%] text-white'>{movieDetail.overview}</p>
+    <p className='mt-[5%] text-white'>{movieDetail?.overview}</p>
     {
-        movieVideo.results[0].site == "YouTube" ?
+        movieVideo?.results[0]?.site == "YouTube" ?
         <iframe
         width="100%"
         height="400px"
