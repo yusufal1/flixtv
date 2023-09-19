@@ -5,12 +5,12 @@ import { TabsProvider } from './Context/TabsContext'
 
 const Page = () => {
   return (
-    <TabsProvider>
-      <div>
-        <TopSection/>
-        <MainSection/>
-      </div>
-    </TabsProvider>
+      <TabsProvider>
+        <div>
+          <TopSection/>
+          <MainSection/>
+        </div>
+      </TabsProvider>
   )
 }
 

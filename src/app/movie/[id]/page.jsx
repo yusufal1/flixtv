@@ -18,20 +18,19 @@ const Page = async ({ params }) => {
   const id = params.id;
   const movieDetail = await getMovie(id);
   const movieVideo = await getMovieVideo(id);
-  console.log("videoooo", movieVideo);
 
   const backgroundImageUrl = `https://image.tmdb.org/t/p/original${movieDetail?.backdrop_path}`;
 
   const containerStyle = {
     backgroundImage: `url('${backgroundImageUrl}')`,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)', // Koyu transparan gri
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
   };
 
   return (
-    <div className="h-screen relative">
+    <div className="h-full relative">
   <div className="bg-cover bg-center absolute inset-0" style={containerStyle}></div>
   <div className='absolute inset-0 bg-gray-950 opacity-80'></div>
-  <div className='flex flex-col relative pt-[10%] px-[10%] w-3/5'>
+  <div className='flex flex-col relative p-[10%] w-3/5'>
     <div className='flex gap-4 w-fit items-center text-white hover:text-secondary transition-colors duration-300 cursor-pointer'>
       <BsPlayCircle size={40}/>
       <span className='text-2xl'>Trailer</span>
@@ -40,7 +39,7 @@ const Page = async ({ params }) => {
     <div className='flex mt-[2%] gap-5'>
         <div className='flex items-center gap-2'>
             <AiOutlineStar size={20} className='text-secondary'/>
-            <span className='text-white'>{movieDetail?.vote_average.toFixed(1)}</span>
+            <span className='text-white'>{movieDetail?.vote_average?.toFixed(1)}</span>
         </div>
         <div className='flex items-center gap-2'>
             <BiSolidCircle size={7} className='text-secondary'/>
@@ -70,7 +69,7 @@ const Page = async ({ params }) => {
       : 
       <iframe
         width="100%"
-        height="400px"
+        height="300px"
         src={`https://player.vimeo.com/video/${movieVideo.results[0].key}`}
         frameborder="0"
         allowfullscreen

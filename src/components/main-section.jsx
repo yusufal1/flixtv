@@ -1,19 +1,22 @@
 'use client'
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import moment from 'moment'
 import { BsBookmark, BsPlayCircle } from "react-icons/bs"
 import { AiOutlineStar } from "react-icons/ai"
 import { BiMoviePlay } from "react-icons/bi"
 import { useTabs } from '@/app/Context/TabsContext'
 import { useRouter } from 'next/navigation'
+// import { useGenres } from '@/app/Context/GenresContext'
 
 import CatalogBar from './catalog-bar'
 
 const MainSection = () => {
   const { tabs } = useTabs();
+  // const { genres, selectedGenre } = useGenres();
   const [topMovies, setTopMovies] = useState([]);
   const [movieDetail, setMovieDetail] = useState(false)
   const [hoverStates, setHoverStates] = useState([]);
+
   const router = useRouter()
 
   const toggleHover = (index) => {

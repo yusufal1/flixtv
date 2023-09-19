@@ -38,22 +38,38 @@ const TopSection = () => {
 
   return (
     <Swiper
-    slidesPerView={'auto'}
-        spaceBetween={30}
+    slidesPerView={3}
+        spaceBetween={20}
         freeMode={true}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 4,
+            spaceBetween: 40,
+          },
+          1024: {
+            slidesPerView: 5,
+            spaceBetween: 50,
+          },
+        }}
     className="bg-primary !pl-[3%]"
     >
       {movies.map((movie, index) => (
         <SwiperSlide key={movie.id} className="pt-5 pb-8">
-          <div onClick={() => router.push(`/movie/${movie.id}`)} onMouseEnter={() => toggleHover(index)} onMouseLeave={() => toggleHover(index)} className="cursor-pointer shadow-lg w-[300px] overflow-hidden rounded-2xl bg-gray-500 opacity-70 hover:bg-transparent hover:opacity-100 transition duration-500">
-            <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt="" className="object-cover relative hover:scale-110 transition duration-500 cursor-pointer"/>
-            <div className={`${hoverStates[index] ? "" : "hidden"} transition duration-500`}>
-              <div className="absolute top-10 left-5 bg-primary p-2 rounded-lg">
-                <BsBookmark size={15} className="text-secondary hover:text-[#ffc312] transition duration-500"/>
-              </div>
-              <div className="absolute flex gap-1 top-10 right-14 bg-primary p-2 rounded-lg">
-                <AiOutlineStar size={15} className="text-secondary"/>
-                <span className="text-xs text-white hover:!opacity-100">{movie.vote_average}</span>
+          <div onClick={() => router.push(`/movie/${movie.id}`)} onMouseEnter={() => toggleHover(index)} onMouseLeave={() => toggleHover(index)} className="cursor-pointer shadow-lg overflow-hidden rounded-2xl bg-gray-500 opacity-70 hover:bg-transparent hover:opacity-100 transition duration-500">
+            <div className="relative">
+              <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className="object-cover relative hover:scale-110 transition duration-500 cursor-pointer"/>
+              <div className={`${hoverStates[index] ? "" : "hidden"} transition duration-500`}>
+                <div className="absolute top-8 left-5 bg-primary p-2 rounded-lg">
+                  <BsBookmark size={15} className="text-secondary hover:text-[#ffc312] transition duration-500"/>
+                </div>
+                <div className="absolute flex gap-1 top-8 right-5 bg-primary p-2 rounded-lg">
+                  <AiOutlineStar size={15} className="text-secondary"/>
+                  <span className="text-xs text-white hover:!opacity-100">{movie.vote_average}</span>
+                </div>
               </div>
             </div>
         </div>
