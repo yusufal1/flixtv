@@ -7,7 +7,14 @@ import { HiStatusOnline } from 'react-icons/hi'
 
 const Header = () => {
     const [otherLinks, setOtherLinks] = useState(false)
+    const [keyword, setKeyword] = useState('')
     const router = useRouter()
+
+    const searchFunc = (e) => {
+        if(e.key === 'Enter' && keyword.length >= 3) {
+            router.push(`/search/${keyword}`)
+        }
+    }
 
   return (
     <div className='flex flex-row py-7 px-[10%] bg-primary text-white items-center justify-between'>
@@ -49,7 +56,7 @@ const Header = () => {
         
         <div className='flex justify-between gap-5'>
             <div className='flex justify-between items-center rounded-lg bg-[#172b4e] px-5 py-2'>
-                <input type="text" className='bg-transparent outline-none placeholder:text-white' placeholder="I'm looking for..."/>
+                <input onKeyDown={searchFunc} onChange={e => setKeyword(e.target.value)} type="text" className='bg-transparent outline-none placeholder:text-white' placeholder="I'm looking for..."/>
                 <BiSearch size={25} className='text-secondary cursor-pointer'/>
             </div>
             <div className='flex justify-between items-center gap-2'>

@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 
 import CatalogBar from './catalog-bar';
 
-const MainSection = () => {
+const MainSection = ({ searchResults }) => {
   const { tabs } = useTabs();
   const [movies, setMovies] = useState([]);
   const [hoverStates, setHoverStates] = useState([]);
@@ -21,6 +21,14 @@ const MainSection = () => {
     newHoverStates[index] = !newHoverStates[index];
     setHoverStates(newHoverStates);
   };
+
+  useEffect(() => {
+    if (!searchResults) {
+      setMovies([]);
+    } else {
+      setMovies(searchResults);
+    }
+  }, [searchResults]);
 
   useEffect(() => {
     const fetchMovies = async () => {
