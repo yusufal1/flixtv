@@ -70,7 +70,7 @@ const Page = async ({ params }) => {
       <iframe
         width="100%"
         height="300px"
-        src={`https://player.vimeo.com/video/${movieVideo.results[0].key}`}
+        src={`https://player.vimeo.com/video/${movieVideo?.results[0]?.key}`}
         frameborder="0"
         allowfullscreen
         className='rounded-3xl mt-[4%]'

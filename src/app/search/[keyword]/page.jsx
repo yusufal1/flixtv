@@ -1,12 +1,12 @@
 "use client"
+import MovieGrid from '@/components/movie-grid';
 import React, { useEffect, useState } from 'react';
-import { useTabs } from '@/app/Context/TabsContext';
+import { useRouter } from 'next/navigation';
 
 const Page = ({ params }) => {
-  
-  const [matchingMovies, setMatchingMovies] = useState([])
-
+  const [matchingMovies, setMatchingMovies] = useState([]);
   const keyword = params.keyword;
+  const router = useRouter()
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -25,19 +25,15 @@ const Page = ({ params }) => {
   }, [keyword]);
 
   return (
-  <div>
-    {matchingMovies && matchingMovies.length > 0 ? (
-      matchingMovies.map((movie, index) => (
-        <div className='flex text-red-700' key={index}>
-          <img src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`} alt="" />
-        </div>
-      ))
-    ) : (
-      <div>Aranılan şey bulunamadı</div>
-    )}
-  </div>
-);
-
+    <div className='px-[10%] bg-primary text-white pt-[5%] pb-[2%]'>
+      {matchingMovies && matchingMovies.length > 0 ? (
+        // MovieGrid bileşenini kullanarak matchingMovies'i gösterin
+        <MovieGrid movies={matchingMovies} onMovieClick={(movieId) => router.push(`/movie/${movieId}`)}/>
+      ) : (
+        <div>Aranılan şey bulunamadı</div>
+      )}
+    </div>
+  );
 };
 
 export default Page;
