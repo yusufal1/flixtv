@@ -1,5 +1,5 @@
-import MainSection from '@/components/main-section'
-import TopSection from '@/components/top-section'
+import MainSection from '@/app/components/main-section'
+import TopSection from '@/app/components/top-section'
 import React from 'react'
 import { TabsProvider } from './Context/TabsContext'
 

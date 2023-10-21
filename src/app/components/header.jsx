@@ -9,7 +9,6 @@ const Header = () => {
     const [otherLinks, setOtherLinks] = useState(false)
     const [keyword, setKeyword] = useState('')
     const [scrollPosition, setSrollPosition] = useState(0);
-    
     const router = useRouter()
 
     const searchFunc = (e) => {
@@ -32,7 +31,7 @@ const Header = () => {
     }, []);
 
   return (
-    <div className={`flex flex-row py-7 px-[10%] bg-primary text-white items-center justify-between fixed top-0 z-10 w-full transition-all duration-300 ${scrollPosition > 150 ? "bg-[#1b202e] transition-all duration-300" : ""}`}>
+    <div className={`flex flex-row py-7 px-[10%] bg-primary text-white items-center justify-between fixed top-0 mb-[10%] z-10 w-full transition-all duration-300 ${scrollPosition > 150 ? "bg-[#212638] transition-all duration-300" : ""}`}>
         <div onClick={() => router.push("/")} className='flex font-bold items-end gap-1 cursor-pointer'>
             <span className='text-3xl'>FLIX</span>
             <span className='text-lg text-secondary'>TV</span>
@@ -56,11 +55,10 @@ const Header = () => {
                 <div className={`absolute  bg-[#172b4e] px-4 py-3  min-w-[160px] rounded-xl top-[75px] z-10 ${otherLinks ? "" : "hidden"}`}>
                     <div className='flex flex-col gap-3 max-h-[240px] overflow-y-scroll'>
                         <a href="/">About us</a>
-                        <a href="/">Profile</a>
                         <a href="/">Contacts</a>
-                        <a href="/">Interview</a>
-                        <a href="/">Admin pages</a>
+                        <a href="/">Movies</a>
                         <a href="/">Privacy policy</a>
+                        <a href="/">Terms and conditions</a>
                         <a href="/">Sign in</a>
                         <a href="/">Sign up</a>
                         <a href="/">Forgot password</a>

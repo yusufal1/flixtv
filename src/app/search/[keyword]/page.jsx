@@ -1,5 +1,5 @@
 "use client"
-import MovieGrid from '@/components/movie-grid';
+import MovieGrid from '@/app/components/movie-grid';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';

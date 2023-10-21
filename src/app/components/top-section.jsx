@@ -18,6 +18,7 @@ const TopSection = () => {
   const [movies, setMovies] = useState([]);
   const [movieDetail, setMovieDetail] = useState(false)
   const [hoverStates, setHoverStates] = useState([]);
+  
 
   const toggleHover = (index) => {
     const newHoverStates = [...hoverStates];
