@@ -2,14 +2,15 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { BsBookmark } from "react-icons/bs"
 import { AiOutlineStar } from "react-icons/ai"
 import { useRouter } from 'next/navigation'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import TopCardSkeleton from "@/app/skeletons/TopCardSkeleton";
+
 
 
 const TopSection = () => {
@@ -37,8 +38,9 @@ const TopSection = () => {
   }, []);
 
   return (
-    <Swiper
-    slidesPerView={3}
+    <SkeletonTheme baseColor="#515764" highlightColor="#444">
+      <Swiper
+        slidesPerView={3}
         spaceBetween={20}
         freeMode={true}
         breakpoints={{
@@ -55,27 +57,34 @@ const TopSection = () => {
             spaceBetween: 50,
           },
         }}
-    className="bg-primary !pl-[3%]"
-    >
-      {movies.map((movie, index) => (
-        <SwiperSlide key={movie.id} className="pt-5 pb-8">
-          <div onClick={() => router.push(`/movie/${movie.id}`)} onMouseEnter={() => toggleHover(index)} onMouseLeave={() => toggleHover(index)} className="cursor-pointer shadow-lg overflow-hidden rounded-2xl bg-gray-500 opacity-70 hover:bg-transparent hover:opacity-100 transition duration-500">
-            <div className="relative">
-              <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className="object-cover relative hover:scale-110 transition duration-500 cursor-pointer"/>
-              <div className={`${hoverStates[index] ? "" : "hidden"} transition duration-500`}>
-                <div className="absolute top-8 left-5 bg-primary p-2 rounded-lg">
-                  <BsBookmark size={15} className="text-secondary hover:text-[#ffc312] transition duration-500"/>
-                </div>
-                <div className="absolute flex gap-1 top-8 right-5 bg-primary p-2 rounded-lg">
-                  <AiOutlineStar size={15} className="text-secondary"/>
-                  <span className="text-xs text-white hover:!opacity-100">{movie.vote_average}</span>
+        className="bg-primary !pl-[3%] !pt-[7%]"
+      >
+        {movies.length > 0 ? (
+          movies.map((movie, index) => (
+            <SwiperSlide key={movie.id} className="pt-5 pb-8">
+              <div onClick={() => router.push(`/movie/${movie.id}`)} onMouseEnter={() => toggleHover(index)} onMouseLeave={() => toggleHover(index)} className="cursor-pointer shadow-lg overflow-hidden rounded-2xl bg-gray-500 opacity-70 hover:bg-transparent hover:opacity-100 transition duration-500">
+                <div className="relative">
+                  <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt="" className="object-cover relative hover:scale-110 transition duration-500 cursor-pointer"/>
+                  <div className={`${hoverStates[index] ? "" : "hidden"} transition duration-500`}>
+                    <div className="absolute top-8 left-5 bg-primary p-2 rounded-lg">
+                      <BsBookmark size={15} className="text-secondary hover:text-[#ffc12] transition duration-500"/>
+                    </div>
+                    <div className="absolute flex gap-1 top-8 right-5 bg-primary p-2 rounded-lg">
+                      <AiOutlineStar size={15} className="text-secondary"/>
+                      <span className="text-xs text-white hover:!opacity-100">{movie.vote_average}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-        </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+            </SwiperSlide>
+          ))
+        ) : (
+          <div className="flex flex-row gap-10">
+            <TopCardSkeleton cards={4} />
+          </div>
+        )}
+      </Swiper>
+    </SkeletonTheme>
   );
 };
 

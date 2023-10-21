@@ -4,7 +4,8 @@ import moment from 'moment';
 
 import { useTabs } from '@/app/Context/TabsContext';
 import { useRouter } from 'next/navigation';
-
+import CardSkeleton from '@/app/skeletons/CardSkeleton';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import CatalogBar from './catalog-bar';
 import MovieGrid from './movie-grid';
 
@@ -75,9 +76,17 @@ const MainSection = ({ searchResults }) => {
   }, [tabs]);
 
   return (
-    <div className='px-[10%] bg-primary text-white pt-[5%] pb-[2%]'>
+    <div id='movies' className='px-[10%] bg-primary text-white pt-[5%] pb-[2%]'>
       <CatalogBar updateMovies={updateMovies} updateMoviesByYear={updateMoviesByYear} />
-      <MovieGrid movies={movies} onMovieClick={(movieId) => router.push(`/movie/${movieId}`)} hoverStates={hoverStates} toggleHover={toggleHover} />
+      <SkeletonTheme baseColor="#515764" highlightColor="#444">
+        {movies.length > 0 ? (
+          <MovieGrid movies={movies} onMovieClick={(movieId) => router.push(`/movie/${movieId}`)} hoverStates={hoverStates} toggleHover={toggleHover} />
+        ) : (
+          <div className='flex flex-row gap-10 flex-wrap'>
+            <CardSkeleton cards={8} />
+          </div>
+        )}
+    </SkeletonTheme>
     </div>
   );
 };

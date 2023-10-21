@@ -1,6 +1,7 @@
 import React from 'react'
 import './globals.css'
 import Header from '@/components/header'
+import Footer from '@/components/footer'
 
 const Layout = ({children}) => {
   return (
@@ -8,6 +9,7 @@ const Layout = ({children}) => {
       <body>
         <Header/>
         {children}
+        <Footer/>
       </body>
 
     </html>

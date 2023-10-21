@@ -2,11 +2,16 @@
 import MovieGrid from '@/components/movie-grid';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
+import CardSkeleton from '@/app/skeletons/CardSkeleton';
 
 const Page = ({ params }) => {
   const [matchingMovies, setMatchingMovies] = useState([]);
   const keyword = params.keyword;
   const router = useRouter()
+  
+  
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -25,13 +30,14 @@ const Page = ({ params }) => {
   }, [keyword]);
 
   return (
-    <div className='px-[10%] bg-primary text-white pt-[5%] pb-[2%]'>
-      {matchingMovies && matchingMovies.length > 0 ? (
-        // MovieGrid bileşenini kullanarak matchingMovies'i gösterin
-        <MovieGrid movies={matchingMovies} onMovieClick={(movieId) => router.push(`/movie/${movieId}`)}/>
-      ) : (
-        <div>Aranılan şey bulunamadı</div>
-      )}
+    <div className='px-[10%] bg-primary text-white pt-[5%] pb-[2%] flex flex-wrap gap-10'>
+      <SkeletonTheme baseColor="#515764" highlightColor="#444">
+        {matchingMovies && matchingMovies.length > 0 ? (
+          <MovieGrid movies={matchingMovies} onMovieClick={(movieId) => router.push(`/movie/${movieId}`)}/>
+        ) : (
+          <CardSkeleton cards={8}/>
+        )}
+      </SkeletonTheme>
     </div>
   );
 };

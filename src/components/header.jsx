@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useRouter } from 'next/navigation'
 import { BiSearch } from 'react-icons/bi'
 import { PiSignInBold } from 'react-icons/pi'
@@ -8,16 +8,31 @@ import { HiStatusOnline } from 'react-icons/hi'
 const Header = () => {
     const [otherLinks, setOtherLinks] = useState(false)
     const [keyword, setKeyword] = useState('')
+    const [scrollPosition, setSrollPosition] = useState(0);
+    
     const router = useRouter()
 
     const searchFunc = (e) => {
-        if(e.key === 'Enter' && keyword.length >= 3) {
+        if((e.key === 'Enter' || e.type === 'click') && keyword.length >= 3) {
             router.push(`/search/${keyword}`)
         }
     }
 
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setSrollPosition(position);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
   return (
-    <div className='flex flex-row py-7 px-[10%] bg-primary text-white items-center justify-between'>
+    <div className={`flex flex-row py-7 px-[10%] bg-primary text-white items-center justify-between fixed top-0 z-10 w-full transition-all duration-300 ${scrollPosition > 150 ? "bg-[#1b202e] transition-all duration-300" : ""}`}>
         <div onClick={() => router.push("/")} className='flex font-bold items-end gap-1 cursor-pointer'>
             <span className='text-3xl'>FLIX</span>
             <span className='text-lg text-secondary'>TV</span>
@@ -57,7 +72,7 @@ const Header = () => {
         <div className='flex justify-between gap-5'>
             <div className='flex justify-between items-center rounded-lg bg-[#172b4e] px-5 py-2'>
                 <input onKeyDown={searchFunc} onChange={e => setKeyword(e.target.value)} type="text" className='bg-transparent outline-none placeholder:text-white' placeholder="I'm looking for..."/>
-                <BiSearch size={25} className='text-secondary cursor-pointer'/>
+                <BiSearch onClick={searchFunc} size={25} className='text-secondary cursor-pointer'/>
             </div>
             <div className='flex justify-between items-center gap-2'>
                 <a className='hover:text-secondary transition-colors' href='/'>Sign in</a>
