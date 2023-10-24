@@ -35,7 +35,9 @@ const Header = ({ isLoading, setIsLoading }) => {
 
   return (
     <div className={`flex flex-row py-7 px-[10%] whitespace-nowrap bg-primary text-white items-center gap-5 justify-between lg:fixed top-0 lg:mb-[10%] z-10 w-full transition-all duration-300 ${scrollPosition > 150 ? "bg-[#212638] transition-all duration-300" : ""} ${isOpen ? "flex-col" : "flex-row"}`}>
-        <Hamburger size={20} toggled={isOpen} toggle={setOpen}/>
+        <div className='block xl:hidden'>
+            <Hamburger size={20} toggled={isOpen} toggle={setOpen}/>
+        </div>
         <div onClick={() => router.push("/")} className='flex font-bold items-end gap-1 cursor-pointer'>
             <span className='text-3xl'>FLIX</span>
             <span className='text-lg text-secondary'>TV</span>
@@ -55,25 +57,25 @@ const Header = ({ isLoading, setIsLoading }) => {
                     <a href="/" className='hover:text-secondary transition-colors'>LIVE</a>
                     <HiStatusOnline size={15} className='text-red-600'/>
                 </li>
-                <li>
+                <li className='xl:hidden'>
                     <a href="/" className='hover:text-secondary transition-colors'>Sign in</a>
                 </li>
-                <li>
+                <li className='xl:hidden'>
                     <a href="/" className='hover:text-secondary transition-colors'>Terms and conditions</a>
                 </li>
-                <li>
+                <li className='xl:hidden'>
                     <a href="/" className='hover:text-secondary transition-colors'>Sign up</a>
                 </li>
-                <li>
+                <li className='xl:hidden'>
                     <a href="/" className='hover:text-secondary transition-colors'>Forgot password</a>
                 </li>
-                <li>
+                <li className='xl:hidden'>
                     <a href="/" className='hover:text-secondary transition-colors'>Privacy policy</a>
                 </li>
-                <li>
+                <li className='xl:hidden'>
                     <a href="/" className='hover:text-secondary transition-colors'>Terms and conditions</a>
                 </li>
-                <li>
+                <li className='hidden xl:block'>
                     <span onClick={() => setOtherLinks((current) => !current)} className='hover:text-secondary transition-colors relative cursor-pointer'>...</span>
                     <div className={`absolute  bg-[#172b4e] px-4 py-3  min-w-[160px] rounded-xl top-[75px] z-10 ${otherLinks ? "" : "hidden"}`}>
                         <div className='flex flex-col gap-3 max-h-[240px] overflow-y-scroll'>
