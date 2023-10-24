@@ -92,7 +92,7 @@ const Header = ({ isLoading, setIsLoading }) => {
         </div>
         
         <div className='flex justify-between gap-5'>
-            <div className='flex justify-between items-center rounded-lg bg-[#172b4e] px-5 py-2'>
+            <div className={`sm:flex hidden justify-between items-center rounded-lg bg-[#172b4e] px-5 py-2 ${isOpen && "!flex"}`}>
                 <input onKeyDown={searchFunc} onChange={e => setKeyword(e.target.value)} type="text" className='bg-transparent outline-none placeholder:text-white' placeholder="I'm looking for..."/>
                 <BiSearch onClick={searchFunc} size={25} className='text-secondary cursor-pointer'/>
             </div>

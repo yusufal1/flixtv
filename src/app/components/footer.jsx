@@ -11,7 +11,7 @@ const Footer = () => {
 
   return (
     <div className='bg-[#141A25] px-[10%] text-white pt-[5%]'>
-        <div className='flex gap-[10%]'>
+        <div className='grid xl:grid-cols-5 md:grid-cols-3 grid-cols-2 grid-rows-1 lg:grid-rows-2 gap-y-10'>
             <div className='flex flex-col gap-4'>
                 <div onClick={() => router.push("/")} className='flex font-bold items-end gap-1 cursor-pointer'>
                     <span className='text-2xl'>FLIX</span>
