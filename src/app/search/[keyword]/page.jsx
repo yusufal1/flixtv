@@ -6,7 +6,7 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
 import CardSkeleton from '@/app/skeletons/CardSkeleton';
 
-const Page = ({ params }) => {
+const Page = ({ params, setIsLoading }) => {
   const [matchingMovies, setMatchingMovies] = useState([]);
   const keyword = params.keyword;
   const router = useRouter()

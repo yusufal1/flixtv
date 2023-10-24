@@ -32,24 +32,20 @@ const CatalogBar = (props) => {
   useEffect(() => {
     const fetchMoviesByYear = async () => {
       try {
-        // Seçilen yılı alın
         const selectedYear = moment(startDate).format('YYYY');
   
-        // API'den seçilen yıla ait filmleri getirin
         const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=9f34a27b7dd55dd1715d36f9f331c3d3&primary_release_year=${selectedYear}`);
         const data = await response.json();
   
-        // Elde edilen filmleri kullanın veya başka bir işlem yapın
         console.log(data);
   
-        // props.updateMovies() veya başka bir işlem yapabilirsiniz
       } catch (error) {
         console.error('Filmler alınamadı:', error);
       }
 
         props.updateMoviesByYear(startDate);
     };
-  
+
     fetchMoviesByYear();
   }, [startDate]);
 
@@ -67,7 +63,6 @@ const CatalogBar = (props) => {
 
   const handleAllYearsClick = () => {
     setIsDatePickerOpen(!isDatePickerOpen);
-    
   }
 
 
@@ -91,6 +86,7 @@ const CatalogBar = (props) => {
         </li>
         <li onClick={handleAllYearsClick} className='flex items-center gap-1 relative'>
         <div className='flex gap-2 hover:text-secondary items-center'>
+          <span className={startDate && "hidden"}>All Years</span>
         <DatePicker
             selected={startDate}
             onChange={(date) => setStartDate(date)}
