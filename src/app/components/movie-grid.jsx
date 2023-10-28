@@ -15,7 +15,7 @@ const MovieGrid = ({ movies, onMovieClick }) => {
   };
 
   return (
-    <div className='grid grid-cols-4 gap-10 mt-8 relative'>
+    <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 mt-8 relative'>
       {movies.map((movie, index) => (
         <div
           onClick={() => onMovieClick(movie.id)}

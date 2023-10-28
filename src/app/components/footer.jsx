@@ -26,7 +26,7 @@ const Footer = () => {
             <div className='flex flex-col gap-4'>
                 <h4 className='font-bold'>FlixTV</h4>
                 <ul className='flex flex-col gap-2'>
-                    <li><a href="/" className='hover:text-secondary transition-colors'>About us</a></li>
+                    <li><a href="/about" className='hover:text-secondary transition-colors'>About us</a></li>
                     <li><a href="/" className='hover:text-secondary transition-colors'>Contacs</a></li>
                     <Link to="movies" smooth={true} duration={500}>
                         <li className='hover:text-secondary transition-colors cursor-pointer'>Movies</li>

@@ -51,7 +51,7 @@ const Header = ({ isLoading, setIsLoading }) => {
                     <li className='hover:text-secondary transition-colors cursor-pointer'>Movies</li>
                 </Link>
                 <li>
-                    <a href="/" className='hover:text-secondary transition-colors'>About us</a>
+                    <a href="/about" className='hover:text-secondary transition-colors'>About us</a>
                 </li>
                 <li className='flex items-center gap-2'>
                     <a href="/" className='hover:text-secondary transition-colors'>LIVE</a>

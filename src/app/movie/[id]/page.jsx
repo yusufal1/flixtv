@@ -30,10 +30,11 @@ const Page = async ({ params }) => {
     <div className="h-full relative">
   <div className="bg-cover bg-center absolute inset-0" style={containerStyle}></div>
   <div className='absolute inset-0 bg-gray-950 opacity-80'></div>
-  <div className='flex flex-col relative p-[10%] w-3/5'>
+  <div className='flex flex-col relative p-[10%] lg:w-3/5 w-full'>
     <div className='flex gap-4 w-fit items-center text-white hover:text-secondary transition-colors duration-300 cursor-pointer'>
       <BsPlayCircle size={40}/>
-      <span className='text-2xl'>Trailer</span>
+      {/* <span className='text-2xl'>Trailer</span> */}
+      <a href={`https://www.youtube.com/embed/${movieVideo.results[0].key}`} className='text-2xl' target='_blank'>Trailer</a>
     </div>
     <h2 className='text-white text-4xl mt-[4%]'>{movieDetail?.title}</h2>
     <div className='flex mt-[2%] gap-5'>

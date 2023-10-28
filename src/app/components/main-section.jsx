@@ -25,12 +25,12 @@ const MainSection = ({ searchResults }) => {
   const updateMovies = async (genreId) => {
     try {
       const response = await fetch(
-        `https://api.themoviedb.org/3/${
-          tabs !== 'airing_today' ? 'movie' : 'tv'
-        }/${tabs}?api_key=9f34a27b7dd55dd1715d36f9f331c3d3&with_genres=${genreId}`
+        `https://api.themoviedb.org/3/${tabs !== 'airing_today' ? 'movie' : 'tv'}/${tabs}?api_key=9f34a27b7dd55dd1715d36f9f331c3d3&with_genres=${genreId}`
       );
       const movieData = await response.json();
       setMovies(movieData.results);
+      console.log(movies);
+      console.log(response);
     } catch (error) {
       console.error('Filmler alınamadı:', error);
     }
@@ -40,10 +40,11 @@ const MainSection = ({ searchResults }) => {
     try {
       const selectedYear = moment(selectedDate).format('YYYY');
       const response = await fetch(
-        `https://api.themoviedb.org/3/${tabs !== 'airing_today' ? 'movie' : 'tv'}/${tabs}?api_key=9f34a27b7dd55dd1715d36f9f331c3d3&primary_release_year=${selectedYear}`
+        `https://api.themoviedb.org/3/discover/movie?api_key=9f34a27b7dd55dd1715d36f9f331c3d3&primary_release_year=${selectedYear}`
       );
       const movieData = await response.json();
       setMovies(movieData.results);
+      console.log(movies);
     } catch (error) {
       console.error('Filmler alınamadı:', error);
     }
@@ -82,7 +83,7 @@ const MainSection = ({ searchResults }) => {
         {movies.length > 0 ? (
           <MovieGrid movies={movies} onMovieClick={(movieId) => router.push(`/movie/${movieId}`)} hoverStates={hoverStates} toggleHover={toggleHover} />
         ) : (
-          <div className='flex flex-row gap-10 flex-wrap'>
+          <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10'>
             <CardSkeleton cards={8} />
           </div>
         )}

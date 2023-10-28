@@ -5,6 +5,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
 import { BsBookmark } from "react-icons/bs"
 import { AiOutlineStar } from "react-icons/ai"
 import { useRouter } from 'next/navigation'
@@ -37,24 +39,20 @@ const TopSection = () => {
 
     fetchMovies();
   }, []);
+  
 
   return (
-    <SkeletonTheme baseColor="#515764" highlightColor="#444">
+    <SkeletonTheme baseColor="#515764" highlightColor="#444" className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-10 mt-8 relative">
       <Swiper
-        slidesPerView={3}
         spaceBetween={20}
-        freeMode={true}
+        slidesPerView={2}
         breakpoints={{
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          768: {
-            slidesPerView: 4,
+          540: {
+            slidesPerView: 3,
             spaceBetween: 40,
           },
           1024: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 50,
           },
         }}

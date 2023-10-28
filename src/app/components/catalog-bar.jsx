@@ -38,12 +38,12 @@ const CatalogBar = (props) => {
         const data = await response.json();
   
         console.log(data);
+        props.updateMoviesByYear(startDate);
   
       } catch (error) {
         console.error('Filmler alınamadı:', error);
       }
 
-        props.updateMoviesByYear(startDate);
     };
 
     fetchMoviesByYear();
@@ -53,6 +53,7 @@ const CatalogBar = (props) => {
     try {
       const response = await fetch(`https://api.themoviedb.org/3/${tabs !== 'airing_today' ? 'movie' : 'tv'}/${tabs}?api_key=9f34a27b7dd55dd1715d36f9f331c3d3&with_genres=${genreId}`);
       const data = await response.json();
+      console.log(genreId);
       console.log(data);
       setSelectedGenre(genreId);
       props.updateMovies(genreId);
@@ -67,7 +68,7 @@ const CatalogBar = (props) => {
 
 
   return (
-    <div className='bg-[#172b4e] p-6 flex justify-between rounded-xl'>
+    <div className='bg-[#172b4e] p-6 flex lg:flex-row flex-col gap-y-5 justify-between rounded-xl'>
       <ul className='flex items-center gap-7'>
         <li onClick={() => setShowList((current) => !current)} className='relative flex items-center gap-1 cursor-pointer transition-colors'>
           <div className='flex gap-2 cursor-pointer hover:text-secondary items-center'>
@@ -99,7 +100,7 @@ const CatalogBar = (props) => {
           
         </li>
       </ul>
-      <ul className='flex gap-5 items-center bg-primary p-2 rounded-xl font-medium'>
+      <ul className='flex gap-5 w-fit items-center bg-primary p-2 rounded-xl font-medium'>
         <li onClick={() => setTabs('top_rated')} className={`${tabs === 'top_rated' && 'bg-[#172b4e] text-secondary rounded-xl'} cursor-pointer p-1`}>Top Rated</li>
         <li onClick={() => setTabs('popular')} className={`${tabs === 'popular' && 'bg-[#172b4e] text-secondary rounded-xl'} cursor-pointer p-1`}>Popular</li>
         <li onClick={() => setTabs('airing_today')} className={`${tabs === 'airing_today' && 'bg-[#172b4e] text-secondary rounded-xl'} cursor-pointer p-1`}>Newest</li>
